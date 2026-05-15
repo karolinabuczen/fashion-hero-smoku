@@ -61,6 +61,11 @@ export default function SellerAnalyticsPage() {
   const router = useRouter();
 
   const [widok, setWidok] = useState<Widok>("landing");
+
+  function otworzFormularz() {
+    setWidok("formularz");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
   const [email, setEmail] = useState("");
   const [firma, setFirma] = useState("");
   const [blad, setBlad] = useState("");
@@ -222,7 +227,7 @@ export default function SellerAnalyticsPage() {
           w jednym miejscu, porównane ze średnią FashionHero.
         </p>
         <button
-          onClick={() => setWidok("formularz")}
+          onClick={otworzFormularz}
           className="bg-white text-[var(--color-charcoal)] px-8 py-3 text-sm font-semibold hover:bg-[var(--color-cream)] transition-colors"
         >
           Zapisz się na pilot
@@ -339,7 +344,7 @@ export default function SellerAnalyticsPage() {
           Oferta pilota: <span className="font-medium text-[var(--color-charcoal)]">pierwsze 2 tygodnie gratis</span> — bez zobowiązań.
         </p>
         <button
-          onClick={() => setWidok("formularz")}
+          onClick={otworzFormularz}
           className="bg-[var(--color-charcoal)] text-white px-10 py-3.5 text-sm font-semibold hover:bg-[var(--color-charcoal-light)] transition-colors"
         >
           Zapisz się na pilot
