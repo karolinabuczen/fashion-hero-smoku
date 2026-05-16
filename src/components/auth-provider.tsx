@@ -34,7 +34,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
-        startTransition(() => setUser(JSON.parse(stored)));
+        const parsed = JSON.parse(stored) as User;
+        // isSeller może być undefined w starych sesjach — przeliczamy na bieżąco
+        if (parsed.isSeller === undefined) {
+          parsed.isSeller = MOCK_SELLER_EMAILS.includes(parsed.email.toLowerCase());
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+        }
+        startTransition(() => setUser(parsed));
       }
     } catch {
       // ignore parse errors
