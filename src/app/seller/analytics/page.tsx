@@ -322,14 +322,18 @@ export default function SellerAnalyticsPage() {
                 cx="50%"
                 cy="50%"
                 outerRadius={75}
-                label={({ index }) => { const d = kupujacyDane[index as number]; return `${d.segment}: ${d.wartosc}%`; }}
+                label={({ wartosc }) => `${wartosc}%`}
                 labelLine={false}
               >
                 {kupujacyDane.map((_, i) => (
                   <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
                 ))}
               </Pie>
-              <Tooltip formatter={(v) => [`${v}%`]} />
+              <Tooltip formatter={(v, _name, props) => [`${v}%`, props.payload.segment]} />
+              <Legend
+                formatter={(_, entry) => (entry.payload as { segment: string }).segment}
+                wrapperStyle={{ fontSize: 11 }}
+              />
             </PieChart>
           </ResponsiveContainer>
         </div>
